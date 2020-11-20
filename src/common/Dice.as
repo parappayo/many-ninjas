@@ -1,6 +1,6 @@
-package common 
+package common
 {
-	public class Dice 
+	public class Dice
 	{
 		public static function roll(count :uint, sides :uint) :uint
 		{
@@ -26,17 +26,17 @@ package common
 		{
 			return Math.floor(Math.random() * 8 + 1);
 		}
-		
+
 		public static function roll2d8() :uint
 		{
 			return rolld8() + rolld8();
 		}
-		
+
 		public static function roll3d8() :uint
 		{
 			return rolld8() + rolld8() + rolld8();
 		}
-		
+
 	} // class
 
 } // package

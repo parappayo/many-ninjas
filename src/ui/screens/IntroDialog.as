@@ -1,4 +1,4 @@
-package ui.screens 
+package ui.screens
 {
 	import wyverntail.core.Flow;
 	import ui.flows.*;
@@ -7,22 +7,22 @@ package ui.screens
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.text.TextField;
-	
+
 	public class IntroDialog extends Screen
 	{
 		private var _sprite :Sprite;
 		private var _quad :Quad;
 		private var _caption :TextField;
-		
-		public function IntroDialog(parent :Flow, game :Game) 
+
+		public function IntroDialog(parent :Flow, game :Game)
 		{
 			super(parent, game);
-			
+
 			_sprite = new Sprite();
-			
+
 			var width :Number = Settings.ScreenWidth;
 			var height :Number = 452;
-			
+
 			_quad = new Quad(width, height, 0x8c8c8c);
 			_sprite.addChild(_quad);
 
@@ -35,10 +35,10 @@ package ui.screens
 
 			_sprite.x = 0;
 			_sprite.y = 134;
-			
+
 			_caption.text = Settings.IntroCaption;
 		}
-		
+
 		override protected function handleEnterState(oldState :int, newState :int) :void
 		{
 			if (newState == FlowStates.ACTIVE)
@@ -46,7 +46,7 @@ package ui.screens
 				_game.UISprite.addChild(_sprite);
 			}
 		}
-		
+
 		override protected function handleExitState(oldState :int, newState :int) :void
 		{
 			if (oldState == FlowStates.ACTIVE)
@@ -63,7 +63,7 @@ package ui.screens
 				_parent.handleChildDone();
 				return true;
 			}
-			
+
 			return super.handleSignal(signal, sender, args);
 		}
 

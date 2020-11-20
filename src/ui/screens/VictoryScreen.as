@@ -1,14 +1,14 @@
-package ui.screens 
+package ui.screens
 {
 	import wyverntail.core.Flow;
 	import ui.flows.FlowStates;
 	import starling.display.Image;
-	
+
 	public class VictoryScreen extends Screen
 	{
 		private var _img :Image;
-		
-		public function VictoryScreen(parent :Flow, game :Game) 
+
+		public function VictoryScreen(parent :Flow, game :Game)
 		{
 			super(parent, game);
 			ScreenDuration = 5.0;
@@ -22,7 +22,7 @@ package ui.screens
 				_game.UISprite.addChild(_img);
 			}
 		}
-		
+
 		override protected function handleExitState(oldState :int, newState :int) :void
 		{
 			if (oldState == FlowStates.ACTIVE)
@@ -31,11 +31,11 @@ package ui.screens
 				_img = null;
 			}
 		}
-		
+
 		override public function update(elapsed :Number) :void
 		{
 			super.update(elapsed);
-			
+
 			if (_timeElapsedInState > ScreenDuration)
 			{
 				_parent.handleChildDone();

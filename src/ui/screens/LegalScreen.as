@@ -1,4 +1,4 @@
-package ui.screens 
+package ui.screens
 {
 	import starling.display.*;
 	import starling.text.TextField;
@@ -11,18 +11,18 @@ package ui.screens
 //		private var _img :Image;
 		private var _caption :TextField;
 
-		public function LegalScreen(parent :Flow, game :Game) 
+		public function LegalScreen(parent :Flow, game :Game)
 		{
 			super(parent, game);
 			_sprite = new Sprite();
 		}
-		
+
 		override protected function handleEnterState(oldState :int, newState :int) :void
 		{
 			if (newState == FlowStates.ACTIVE)
 			{
 				_game.UISprite.addChild(_sprite);
-				
+
 //				_img = new Image(Assets.LegalScreenTexture);
 //				_sprite.addChild(_img);
 
@@ -31,7 +31,7 @@ package ui.screens
 				_sprite.addChild(_caption);
 			}
 		}
-		
+
 		override protected function handleExitState(oldState :int, newState :int) :void
 		{
 			if (oldState == FlowStates.ACTIVE)
@@ -40,7 +40,7 @@ package ui.screens
 				_sprite.removeChildren();
 			}
 		}
-		
+
 		override public function handleSignal(signal :int, sender :Object, args :Object) :Boolean
 		{
 			if (_timeElapsedInState > MinScreenDuration &&
@@ -51,7 +51,7 @@ package ui.screens
 				_parent.handleChildDone();
 				return true;
 			}
-			
+
 			return super.handleSignal(signal, sender, args);
 		}
 

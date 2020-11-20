@@ -1,14 +1,14 @@
 
-package 
+package
 {
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	import flash.display.Sprite;
 	import starling.core.Starling;
 	import starling.utils.*;
-	
+
 	[SWF(width=800, height=720, frameRate=60, backgroundColor=0x999999)]
-	public class Main extends Sprite 
+	public class Main extends Sprite
 	{
 		public function Main() :void
 		{
@@ -17,8 +17,8 @@ package
 			starling.showStats = Settings.ShowStats;
 			starling.start();
 		}
-		
+
 	} // class
-	
+
 } // package
 

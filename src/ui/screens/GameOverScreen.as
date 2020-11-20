@@ -1,20 +1,20 @@
-package ui.screens 
+package ui.screens
 {
 	import wyverntail.core.Flow;
 	import ui.flows.FlowStates;
 	import starling.display.*;
 	import starling.text.TextField;
-	
+
 	public class GameOverScreen extends Screen
 	{
 		private var _img :Image;
-		
-		public function GameOverScreen(parent :Flow, game :Game) 
+
+		public function GameOverScreen(parent :Flow, game :Game)
 		{
 			super(parent, game);
 			ScreenDuration = 3.0;
 		}
-		
+
 		override protected function handleEnterState(oldState :int, newState :int) :void
 		{
 			if (newState == FlowStates.ACTIVE)
@@ -23,7 +23,7 @@ package ui.screens
 				_game.UISprite.addChild(_img);
 			}
 		}
-		
+
 		override protected function handleExitState(oldState :int, newState :int) :void
 		{
 			if (oldState == FlowStates.ACTIVE)

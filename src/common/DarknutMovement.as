@@ -1,8 +1,8 @@
-package common 
+package common
 {
 	import wyverntail.core.*;
 	import wyverntail.collision.*;
-	
+
 	/**
 	 *  Movement controller mimicking classic Zelda Darknut enemy patterns.
 	 */
@@ -14,16 +14,16 @@ package common
 		public static const STATE_WALK_SOUTH	:int = 3;
 		public static const STATE_WALK_EAST		:int = 4;
 		public static const STATE_WALK_WEST		:int = 5;
-		
+
 		public static const ChangeDirectionTimeout :Number = 2.0;
 		public static const ChangeDirectionRandomTimeout :Number = 1.5;
 		public static const ChangeDirectionMinTimeout :Number = 0.5;
-		
+
 		// movement speed in pixels per second
 		// TODO: should be a prefab argument
 		public var verticalSpeed :Number = 120;
 		public var horizontalSpeed :Number = 120;
-		
+
 		public var minWorldX :Number = 0;
 		public var maxWorldX :Number = Settings.ScreenWidth - 50;
 		public var minWorldY :Number = 0;
@@ -43,14 +43,14 @@ package common
 			_clip = getComponent(Sprite) as Sprite;
 			_hitbox = getComponent(Hitbox) as Hitbox;
 			_walkmesh = prefabArgs.walkmesh;
-			
+
 			_state = STATE_INIT;
 		}
-		
+
 		override public function update(elapsed :Number) :void
 		{
 			if (!enabled) { return; }
-			
+
 			switch (_state)
 			{
 				case STATE_INIT:
@@ -58,7 +58,7 @@ package common
 						setRandomWalkDirection();
 					}
 					break;
-					
+
 				default:
 					{
 						// wait a random time and change directions
@@ -70,12 +70,12 @@ package common
 					}
 					break;
 			}
-			
+
 			var newX :Number = _pos.worldX;
 			var newY :Number = _pos.worldY;
 			var collidesX :Boolean = false;
 			var collidesY :Boolean = false;
-			
+
 			if (_state == STATE_WALK_NORTH)
 			{
 				newY -= verticalSpeed * elapsed;
@@ -116,11 +116,11 @@ package common
 					collidesX = collidesX || _walkmesh.collides(newX + _hitbox.width, _pos.worldY + _hitbox.height);
 				}
 			}
-			
+
 			if (!collidesX) { _pos.worldX = newX; }
-			if (!collidesY) { _pos.worldY = newY; }			
+			if (!collidesY) { _pos.worldY = newY; }
 			if (collidesX || collidesY) { reverseDirection(); }
-			
+
 			// flip the sprite when moving left
 			if (_clip)
 			{
@@ -134,13 +134,13 @@ package common
 				}
 			}
 		}
-		
+
 		private function resetWalkTimer():void
 		{
 			_walkTimer = ChangeDirectionTimeout + Math.random() * ChangeDirectionRandomTimeout;
 			if (_walkTimer < ChangeDirectionMinTimeout) { _walkTimer = ChangeDirectionMinTimeout; }
 		}
-		
+
 		private function setRandomWalkDirection():void
 		{
 			resetWalkTimer();
@@ -151,7 +151,7 @@ package common
 			else if (rand < 0.75) { _state = STATE_WALK_EAST; }
 			else { _state = STATE_WALK_WEST; }
 		}
-		
+
 		private function changeWalkDirection():void
 		{
 			resetWalkTimer();
@@ -176,7 +176,7 @@ package common
 					break;
 			}
 		}
-		
+
 		private function reverseDirection():void
 		{
 			resetWalkTimer();
@@ -208,7 +208,7 @@ package common
 					break;
 			}
 		}
-		
+
 	} // class
 
 } // package

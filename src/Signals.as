@@ -1,9 +1,9 @@
-package  
+package
 {
-	public class Signals 
+	public class Signals
 	{
 		public static const NONE					:int = 0;
-		
+
 		// system
 		public static const FATAL_ERROR				:int = 1000;
 		public static const CONTROLLER_DISCONNECT	:int = 1001;
@@ -18,7 +18,7 @@ package
 		public static const LOAD_COMPLETE			:int = 1010;
 		public static const SAVE_COMPLETE			:int = 1011;
 		public static const APP_EXIT				:int = 1012;
-		
+
 		// input
 		public static const MOVE_UP_KEYUP			:int = 2000;
 		public static const MOVE_UP_KEYDOWN			:int = 2001;
@@ -40,7 +40,7 @@ package
 		public static const TOUCH_BEGAN				:int = 2017;
 		public static const HELP_KEYUP				:int = 2018;
 		public static const HELP_KEYDOWN			:int = 2019;
-		
+
 		// game
 		public static const PROJECTILE_ADD			:int = 3000;
 		public static const PROJECTILE_REMOVE		:int = 3001;
@@ -54,7 +54,7 @@ package
 		public static const TELEPORT_PLAYER			:int = 3009;
 		public static const CENTER_CAMERA			:int = 3010;
 		public static const SHOW_DIALOG				:int = 3011;
-		
+
 		// Many Ninjas UI
 		public static const SHOW_NINJA_TOTALS		:int = 4000;
 		public static const SHOW_RAID_CASTLE		:int = 4001;

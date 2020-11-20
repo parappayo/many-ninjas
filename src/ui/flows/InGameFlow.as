@@ -1,4 +1,4 @@
-package ui.flows 
+package ui.flows
 {
 	import wyverntail.core.Flow;
 	import ui.screens.*;
@@ -12,16 +12,16 @@ package ui.flows
 		private var _creditsScreen :CreditsScreen;
 		private var _pauseScreen :PauseScreen;
 		private var _messageDialog :MessageDialog;
-		
+
 		// Many Ninjas
 		private var _ninjaTotalsScreen :NinjaTotalsScreen;
 		private var _raidCastleScreen :RaidCastleScreen;
 		private var _upgradesScreen :UpgradesScreen;
-		
-		public function InGameFlow(parent :Flow, game :Game) 
+
+		public function InGameFlow(parent :Flow, game :Game)
 		{
 			super(parent);
-			
+
 			_game = game;
 			_hud = new Hud(this, game);
 			_victoryScreen = new VictoryScreen(this, game);
@@ -29,16 +29,16 @@ package ui.flows
 			_creditsScreen = new CreditsScreen(this, game);
 			_pauseScreen = new PauseScreen(this, game);
 			_messageDialog = new MessageDialog(this, game);
-			
+
 			_ninjaTotalsScreen = new NinjaTotalsScreen(this, game);
 			_raidCastleScreen = new RaidCastleScreen(this, game);
 			_upgradesScreen = new UpgradesScreen(this, game);
 		}
-		
+
 		override public function update(elapsed :Number) :void
 		{
 			super.update(elapsed);
-			
+
 			switch (_state)
 			{
 				case FlowStates.ACTIVE:
@@ -53,7 +53,7 @@ package ui.flows
 					break;
 			}
 		}
-		
+
 		override public function handleSignal(signal :int, sender :Object, args :Object) :Boolean
 		{
 			// some signals are processed regardless of state
@@ -107,11 +107,11 @@ package ui.flows
 							changeState(FlowStates.UPGRADES_SCREEN);
 							return true;
 						}
-						
+
 						_hud.handleSignal(signal, sender, args);
 					}
 					break;
-					
+
 				case FlowStates.PAUSE_SCREEN:
 					{
 						if (signal == Signals.RESUME_GAME)
@@ -125,7 +125,7 @@ package ui.flows
 
 			return super.handleSignal(signal, sender, args);
 		}
-		
+
 		override protected function handleEnterState(oldState :int, newState :int) :void
 		{
 			switch (newState)
@@ -137,7 +137,7 @@ package ui.flows
 						// TODO: resume in-game music here
 					}
 					break;
-					
+
 				case FlowStates.LOADING:
 					{
 						//_game.loadLevel(Settings.StartingLevel, "default");
@@ -145,63 +145,63 @@ package ui.flows
 						changeState(FlowStates.ACTIVE);
 					}
 					break;
-					
+
 				case FlowStates.VICTORY_SCREEN:
 					{
 						_child = _victoryScreen;
 						_child.changeState(FlowStates.ACTIVE);
 					}
 					break;
-					
+
 				case FlowStates.GAME_OVER_SCREEN:
 					{
 						_child = _gameOverScreen;
 						_child.changeState(FlowStates.ACTIVE);
 					}
 					break;
-					
+
 				case FlowStates.CREDITS_SCREEN:
 					{
 						_child = _creditsScreen;
-						_child.changeState(FlowStates.ACTIVE);						
+						_child.changeState(FlowStates.ACTIVE);
 					}
 					break;
-					
+
 				case FlowStates.PAUSE_SCREEN:
 					{
 						_child = _pauseScreen;
 						_child.changeState(FlowStates.ACTIVE);
 					}
 					break;
-					
+
 				case FlowStates.MESSAGE_DIALOG:
 					{
 						_child = _messageDialog;
 						_child.changeState(FlowStates.ACTIVE);
 					}
 					break;
-					
+
 				case FlowStates.NINJA_TOTALS_SCREEN:
 					{
 						_child = _ninjaTotalsScreen;
 						_child.changeState(FlowStates.ACTIVE);
 					}
 					break;
-					
+
 				case FlowStates.RAID_CASTLE_SCREEN:
 					{
 						_child = _raidCastleScreen;
 						_child.changeState(FlowStates.ACTIVE);
 					}
 					break;
-					
+
 				case FlowStates.UPGRADES_SCREEN:
 					{
 						_child = _upgradesScreen;
 						_child.changeState(FlowStates.ACTIVE);
 					}
 					break;
-					
+
 				case FlowStates.EXIT:
 					{
 						// TODO: stop game music here
@@ -209,7 +209,7 @@ package ui.flows
 					break;
 			}
 		}
-		
+
 		override protected function handleExitState(oldState :int, newState :int) :void
 		{
 			switch (oldState)
@@ -221,11 +221,11 @@ package ui.flows
 					break;
 			}
 		}
-		
+
 		override public function handleChildDone() :void
 		{
 			super.handleChildDone();
-			
+
 			switch (_state)
 			{
 				case FlowStates.VICTORY_SCREEN:
@@ -237,12 +237,12 @@ package ui.flows
 				case FlowStates.GAME_OVER_SCREEN:
 					{
 						changeState(FlowStates.ACTIVE);
-						
+
 						// TODO: reset the player state here
 						_game.handleSignal(Signals.LEVEL_RESET, this, {});
 					}
 					break;
-					
+
 				case FlowStates.CREDITS_SCREEN:
 					{
 						// return to main menu
@@ -250,19 +250,19 @@ package ui.flows
 						_parent.handleChildDone();
 					}
 					break;
-					
+
 				case FlowStates.PAUSE_SCREEN:
 					{
 						queueSignal(Signals.RESUME_GAME, null, null);
 					}
 					break;
-					
+
 				case FlowStates.MESSAGE_DIALOG:
 					{
-						changeState(FlowStates.ACTIVE);			
+						changeState(FlowStates.ACTIVE);
 					}
 					break;
-					
+
 				case FlowStates.NINJA_TOTALS_SCREEN:
 				case FlowStates.RAID_CASTLE_SCREEN:
 				case FlowStates.UPGRADES_SCREEN:
@@ -271,7 +271,7 @@ package ui.flows
 					}
 					break;
 			}
-		}		
+		}
 	}
 
 } // package

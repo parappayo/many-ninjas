@@ -1,11 +1,11 @@
 
-package  
+package
 {
 	import starling.text.BitmapFont;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 
-	public class Assets 
+	public class Assets
 	{
 		// ui screens
 		[Embed(source="../assets/Textures/Screens/Legal.png")]
@@ -29,7 +29,7 @@ package
 		[Embed(source="../assets/Textures/Screens/Loading.png")]
 		private static const LoadingScreenImg :Class;
 		public static var LoadingScreenTexture :Texture;
-		
+
 		// texture atlas
 		[Embed(source="../assets/atlases/sprites.png")]
 		private static var SpritesPNG :Class;
@@ -46,10 +46,10 @@ package
 			VictoryScreenTexture = Texture.fromBitmap(new VictoryScreenImg());
 			DialogueScreenTexture = Texture.fromBitmap(new DialogueScreenImg());
 			LoadingScreenTexture = Texture.fromBitmap(new LoadingScreenImg());
-			
+
 			Sprites = new TextureAtlas(Texture.fromBitmap(new SpritesPNG), XML(new SpritesXML()));
 		}
-		
+
 	} // class
 
 } // package

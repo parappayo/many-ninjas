@@ -1,7 +1,7 @@
-package ui.flows 
+package ui.flows
 {
 	import wyverntail.core.FlowStates;
-	
+
 	public class FlowStates extends wyverntail.core.FlowStates
 	{
 		// common states
@@ -18,7 +18,7 @@ package ui.flows
 		// child flows
 		public static const FRONT_END_FLOW		:int = 1001;
 		public static const IN_GAME_FLOW		:int = 1002;
-		
+
 		// screen states
 		public static const LOADING_SCREEN		:int = 2001;
 		public static const LEGAL_SCREEN		:int = 2002;
@@ -32,12 +32,12 @@ package ui.flows
 		public static const GAME_OVER_SCREEN	:int = 2010;
 		public static const LEVEL_SELECT_SCREEN	:int = 2011;
 		public static const CREDITS_SCREEN		:int = 2012;
-		
+
 		// Many Ninjas
 		public static const NINJA_TOTALS_SCREEN		:int = 3000;
 		public static const RAID_CASTLE_SCREEN		:int = 3001;
 		public static const UPGRADES_SCREEN			:int = 3002;
 	}
-	
+
 } // package
 

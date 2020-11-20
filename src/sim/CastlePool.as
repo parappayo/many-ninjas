@@ -1,4 +1,4 @@
-package sim 
+package sim
 {
 	import wyverntail.core.*;
 
@@ -8,7 +8,7 @@ package sim
 	public class CastlePool extends Component
 	{
 		// http://en.wikipedia.org/wiki/Japan%27s_Top_100_Castles
-		
+
 		public const CastleNames :Array = [
 			// Touhoku
 			"Hirosaki-jou",
@@ -26,7 +26,7 @@ package sim
 			"Nemuro Peninsula Chashiato",
 			"Goryoukaku",
 			"Matsumae-jou",
-			
+
 			// Kantou
 			"Mito-jou",
 			"Banna-ji",
@@ -47,7 +47,7 @@ package sim
 			"Takatou-jou",
 			"Shibata-jou",
 			"Kasugayama-jou",
-			
+
 			// Chuubu
 			"Takaoka-jou",
 			"Nanao-jou",
@@ -65,7 +65,7 @@ package sim
 			"Nagashino-jou",
 			"Iga Ueno-jou",
 			"Matsusaka-jou",
-			
+
 			// Kansai
 			"Odani-jou",
 			"Hikone-jou",
@@ -81,7 +81,7 @@ package sim
 			"Akou-jou",
 			"Takatori-jou",
 			"Wakayama-jou",
-			
+
 			// Chuugoku
 			"Tottori-jou",
 			"Matsue-jou",
@@ -96,7 +96,7 @@ package sim
 			"Hiroshima-jou",
 			"Iwakuni-jou",
 			"Hagi-jou",
-			
+
 			// Shikoku
 			"Tokushima-jou",
 			"Takamatsu-jou",
@@ -107,7 +107,7 @@ package sim
 			"Ouzu-jou",
 			"Uwajima-jou",
 			"Kouchi-jou",
-			
+
 			// Kyuushuu
 			"Fukuoka-jou",
 			"Ouno-jou",
@@ -126,31 +126,31 @@ package sim
 			"Nakagusuku-jou",
 			"Shuri-jou"
 		];
-		
+
 		private var _game :Game;
 
 		private var _CurrentCastle :int = 0;
 		public function get CurrentCastle() :int { return _CurrentCastle; }
-		
+
 		public function get CurrentCastleName() :String { return CastleNames[_CurrentCastle]; }
 		public function get CurrentCastlePower() :Number { return Math.pow(10, _CurrentCastle + 1); }
-		
+
 		override public function start(prefabArgs :Object, spawnArgs :Object) :void
 		{
 			_game = prefabArgs.game;
 		}
-		
+
 		public function conquerCurrentCastle() :void
 		{
 			_game.handleSignal(Signals.CASTLE_CONQUERED, this, { castlePower : CurrentCastlePower } );
-			
+
 			_CurrentCastle += 1;
 			if (_CurrentCastle >= CastleNames.length)
 			{
 				_CurrentCastle = CastleNames.length;
 			}
 		}
-		
+
 	} // class
 
 } // package

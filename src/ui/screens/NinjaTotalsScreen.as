@@ -1,4 +1,4 @@
-package ui.screens 
+package ui.screens
 {
 	import feathers.controls.Button;
 	import starling.display.Image;
@@ -14,35 +14,35 @@ package ui.screens
 	public class NinjaTotalsScreen extends Screen
 	{
 		private var _sprite :Sprite;
-		
+
 		private var _rankIcon :Vector.<Image>;
 		private var _rankCountText :Vector.<TextField>;
 
 		private var _NinjaPool :NinjaPool;
 
-		public function NinjaTotalsScreen(parent :Flow, game :Game) 
+		public function NinjaTotalsScreen(parent :Flow, game :Game)
 		{
 			super(parent, game);
 
 			_sprite = new Sprite();
 			_rankCountText = new Vector.<TextField>();
 		}
-		
+
 		override protected function handleEnterState(oldState :int, newState :int) :void
 		{
 			if (newState == FlowStates.ACTIVE)
 			{
 				_game.UISprite.addChild(_sprite);
-				
+
 				_NinjaPool = _game.SimEntity.getComponent(NinjaPool) as NinjaPool;
 
 				var backingQuad :Quad = new Quad(Settings.ScreenWidth, Settings.ScreenHeight, 0xcccccc);
 				backingQuad.alpha = 0.9;
 				_sprite.addChild(backingQuad);
-			
+
 				var layoutX :int = Settings.ScreenWidth * 0.5;
 				var layoutY :int = 10;
-				
+
 				for (var rank :int = 0; rank < NinjaPool.NUM_NINJA_RANKS; rank++)
 				{
 					var textureName :String = NinjaPool.ninjaTextureName(rank, "attack");
@@ -52,7 +52,7 @@ package ui.screens
 					img.x = layoutX - 40;
 					img.y = layoutY;
 					_sprite.addChild(img);
-					
+
 					var tf :TextField = new TextField(Settings.ScreenWidth / 3, 50, "", Settings.DefaultFont, Settings.FontSize);
 					tf.hAlign = HAlign.LEFT;
 					tf.x = layoutX + 20;
@@ -60,17 +60,17 @@ package ui.screens
 					tf.text = "x " + Utils.formatNumber(_NinjaPool.ninjaCountAtRank(rank));
 					_sprite.addChild(tf);
 					_rankCountText[rank] = tf;
-					
+
 					layoutY += 50;
 				}
-				
+
 				var totalPower :TextField = new TextField(Settings.ScreenWidth / 3, 50, "", Settings.DefaultFont, Settings.FontSize);
 				totalPower.text = "Combined Strength: " + Utils.formatNumber(_NinjaPool.TotalPower);
 				totalPower.x = layoutX - totalPower.width * 0.5;
 				totalPower.y = layoutY;
 				_sprite.addChild(totalPower);
 				layoutY += 50;
-			
+
 				var exitButton :Button = new Button();
 				exitButton.label = "Back";
 				exitButton.addEventListener(Event.TRIGGERED, function() :void { _parent.handleChildDone(); } );
@@ -81,17 +81,17 @@ package ui.screens
 				layoutY += 50;
 			}
 		}
-		
+
 		override protected function handleExitState(oldState :int, newState :int) :void
 		{
 			if (oldState == FlowStates.ACTIVE)
 			{
 				_game.UISprite.removeChild(_sprite);
-			
+
 				_sprite.removeChildren();
 			}
 		}
-		
+
 		override public function handleSignal(signal :int, sender :Object, args :Object) :Boolean
 		{
 			if (signal == Signals.ACTION_KEYUP ||
@@ -100,7 +100,7 @@ package ui.screens
 				_parent.handleChildDone();
 				return true;
 			}
-			
+
 			return false;
 		}
 

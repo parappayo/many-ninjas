@@ -1,11 +1,11 @@
-package common 
+package common
 {
 	import wyverntail.core.*;
 
 	public class ProximityTrigger extends Component
 	{
 		public var spawnArgs :Object;
-		
+
 		private var _game :Game;
 		private var _signal :int;
 		private var _signalArgs :Object;
@@ -14,11 +14,11 @@ package common
 		private var _triggerRadius :Number;
 		private var _isTriggered :Boolean;
 		private var _canRepeat :Boolean;
-		
+
 		override public function start(prefabArgs :Object, spawnArgs :Object) :void
 		{
 			this.spawnArgs = spawnArgs;
-			
+
 			_game = prefabArgs.game;
 			_signal = prefabArgs.signal;
 			_pos = getComponent(Position2D) as Position2D;
@@ -27,7 +27,7 @@ package common
 			_isTriggered = false;
 			_canRepeat = prefabArgs.canRepeat;
 		}
-		
+
 		override public function update(elapsed :Number) :void
 		{
 			var distSq :Number = _pos.distanceSquared(_playerPos);
@@ -36,7 +36,7 @@ package common
 				if (!_isTriggered)
 				{
 					_game.handleSignal(_signal, this, spawnArgs);
-					
+
 					_isTriggered = true;
 				}
 			}
@@ -45,7 +45,7 @@ package common
 				_isTriggered = false;
 			}
 		}
-		
+
 	} // class
 
 } // package

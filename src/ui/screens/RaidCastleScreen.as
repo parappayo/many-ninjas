@@ -1,4 +1,4 @@
-package ui.screens 
+package ui.screens
 {
 	import starling.display.Sprite;
 	import starling.display.Quad;
@@ -9,7 +9,7 @@ package ui.screens
 	import wyverntail.core.Flow;
 	import ui.flows.FlowStates;
 	import sim.*;
-	
+
 	public class RaidCastleScreen extends Screen
 	{
 		private var _sprite :Sprite;
@@ -18,13 +18,13 @@ package ui.screens
 		private var _RicePool :RicePool;
 		private var _CastlePool :CastlePool;
 
-		public function RaidCastleScreen(parent :Flow, game :Game) 
+		public function RaidCastleScreen(parent :Flow, game :Game)
 		{
 			super(parent, game);
 
 			_sprite = new Sprite();
 		}
-		
+
 		override protected function handleEnterState(oldState :int, newState :int) :void
 		{
 			if (newState == FlowStates.ACTIVE)
@@ -55,7 +55,7 @@ package ui.screens
 				castleName.y = layoutY;
 				_sprite.addChild(castleName);
 				layoutY += 60;
-				
+
 				var power :TextField = new TextField(Settings.ScreenWidth / 3, 50, "", Settings.DefaultFont, Settings.FontSize);
 				power.text = "Power Level " + Utils.formatNumber(_CastlePool.CurrentCastlePower);
 				power.x = layoutX - power.width * 0.5;
@@ -71,7 +71,7 @@ package ui.screens
 				attackButton.y = layoutY;
 				_sprite.addChild(attackButton);
 				layoutY += 50;
-				
+
 				var exitButton :Button = new Button();
 				exitButton.label = "Back";
 				exitButton.addEventListener(Event.TRIGGERED, function() :void { _parent.handleChildDone(); } );
@@ -82,17 +82,17 @@ package ui.screens
 				layoutY += 50;
 			}
 		}
-		
+
 		override protected function handleExitState(oldState :int, newState :int) :void
 		{
 			if (oldState == FlowStates.ACTIVE)
 			{
 				_game.UISprite.removeChild(_sprite);
-			
+
 				_sprite.removeChildren();
 			}
 		}
-		
+
 		override public function handleSignal(signal :int, sender :Object, args :Object) :Boolean
 		{
 			if (signal == Signals.ACTION_KEYUP ||
@@ -101,16 +101,16 @@ package ui.screens
 				_parent.handleChildDone();
 				return true;
 			}
-			
+
 			return false;
 		}
-		
+
 		private function raidCastle() :void
 		{
 			_parent.handleChildDone();
 			_NinjaPool.raidCastle();
 		}
-		
+
 	} // class
 
 } // package

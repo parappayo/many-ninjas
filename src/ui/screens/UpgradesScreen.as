@@ -1,4 +1,4 @@
-package ui.screens 
+package ui.screens
 {
 	import starling.display.Sprite;
 	import starling.display.Quad;
@@ -9,7 +9,7 @@ package ui.screens
 	import wyverntail.core.Flow;
 	import ui.flows.FlowStates;
 	import sim.*;
-	
+
 	public class UpgradesScreen extends Screen
 	{
 		private var _sprite :Sprite;
@@ -17,7 +17,7 @@ package ui.screens
 		private var _NinjaPool :NinjaPool;
 		private var _RicePool :RicePool;
 		private var _CastlePool :CastlePool;
-		
+
 		private var _autoHarvestDescription :TextField
 		private var _autoHarvestCost :TextField
 		private var _autoHarvestButton :Button;
@@ -34,13 +34,13 @@ package ui.screens
 		private var _clanLeaderCost :TextField
 		private var _clanLeaderButton :Button;
 
-		public function UpgradesScreen(parent :Flow, game :Game) 
+		public function UpgradesScreen(parent :Flow, game :Game)
 		{
 			super(parent, game);
 
 			_sprite = new Sprite();
 		}
-		
+
 		override protected function handleEnterState(oldState :int, newState :int) :void
 		{
 			if (newState == FlowStates.ACTIVE)
@@ -77,7 +77,7 @@ package ui.screens
 				_autoHarvestButton.y = layoutY;
 				_sprite.addChild(_autoHarvestButton);
 				layoutY += 50;
-				
+
 				_ninjaHarvestDescription = new TextField(Settings.ScreenWidth, 50, "", Settings.DefaultFont, Settings.FontSize);
 				_ninjaHarvestDescription.x = layoutX - _ninjaHarvestDescription.width * 0.5;
 				_ninjaHarvestDescription.y = layoutY;
@@ -97,7 +97,7 @@ package ui.screens
 				_ninjaHarvestButton.y = layoutY;
 				_sprite.addChild(_ninjaHarvestButton);
 				layoutY += 50;
-				
+
 				_trainingDescription = new TextField(Settings.ScreenWidth, 50, "", Settings.DefaultFont, Settings.FontSize);
 				_trainingDescription.x = layoutX - _trainingDescription.width * 0.5;
 				_trainingDescription.y = layoutY;
@@ -117,7 +117,7 @@ package ui.screens
 				_trainingButton.y = layoutY;
 				_sprite.addChild(_trainingButton);
 				layoutY += 50;
-				
+
 				_clanLeaderDescription = new TextField(Settings.ScreenWidth, 50, "", Settings.DefaultFont, Settings.FontSize);
 				_clanLeaderDescription.x = layoutX - _clanLeaderDescription.width * 0.5;
 				_clanLeaderDescription.y = layoutY;
@@ -137,7 +137,7 @@ package ui.screens
 				_clanLeaderButton.y = layoutY;
 				_sprite.addChild(_clanLeaderButton);
 				layoutY += 50;
-				
+
 				layoutY += 10;
 				var exitButton :Button = new Button();
 				exitButton.label = "Back";
@@ -147,21 +147,21 @@ package ui.screens
 				exitButton.y = layoutY;
 				_sprite.addChild(exitButton);
 				layoutY += 50;
-				
+
 				refreshButtons();
 			}
 		}
-		
+
 		override protected function handleExitState(oldState :int, newState :int) :void
 		{
 			if (oldState == FlowStates.ACTIVE)
 			{
 				_game.UISprite.removeChild(_sprite);
-			
+
 				_sprite.removeChildren();
 			}
 		}
-		
+
 		override public function handleSignal(signal :int, sender :Object, args :Object) :Boolean
 		{
 			if (signal == Signals.ACTION_KEYUP ||
@@ -170,10 +170,10 @@ package ui.screens
 				_parent.handleChildDone();
 				return true;
 			}
-			
+
 			return false;
 		}
-		
+
 		private function refreshButtons() :void
 		{
 			refreshAutoHarvestButton();
@@ -181,7 +181,7 @@ package ui.screens
 			refreshTrainingButton();
 			refreshClanLeaderButton();
 		}
-		
+
 		private function refreshAutoHarvestButton() :void
 		{
 			var upgradeCost :Number = _RicePool.autoHarvestCost(_RicePool.AutoHarvestUpgradeLevel + 1);
@@ -203,19 +203,19 @@ package ui.screens
 				_autoHarvestButton.isEnabled = _RicePool.BagsOfRice >= upgradeCost;
 			}
 		}
-		
+
 		private function buyAutoHarvest() :void
 		{
 			var upgradeCost :Number = _RicePool.autoHarvestCost(_RicePool.AutoHarvestUpgradeLevel + 1);
 			_RicePool.BagsOfRice -= upgradeCost;
-			
+
 			_RicePool.AutoHarvestUpgradeLevel = Math.min(
 				_RicePool.AutoHarvestUpgradeLevel + 1,
 				RicePool.MaxAutoHarvestUpgradeLevel);
-				
+
 			refreshButtons();
 		}
-		
+
 		private function refreshNinjaHarvestButton() :void
 		{
 			var upgradeCost :Number = _RicePool.ninjaHarvestCost(_RicePool.NinjaHarvestUpgradeLevel + 1);
@@ -237,19 +237,19 @@ package ui.screens
 				_ninjaHarvestButton.isEnabled = _RicePool.BagsOfRice >= upgradeCost;
 			}
 		}
-		
+
 		private function buyNinjaHarvest() :void
 		{
 			var upgradeCost :Number = _RicePool.ninjaHarvestCost(_RicePool.NinjaHarvestUpgradeLevel + 1);
 			_RicePool.BagsOfRice -= upgradeCost;
-			
+
 			_RicePool.NinjaHarvestUpgradeLevel = Math.min(
 				_RicePool.NinjaHarvestUpgradeLevel + 1,
 				RicePool.MaxNinjaHarvestUpgradeLevel);
-				
+
 			refreshButtons();
 		}
-		
+
 		private function refreshTrainingButton() :void
 		{
 			var upgradeCost :Number = _NinjaPool.trainingCost(_NinjaPool.TrainingUpgradeLevel + 1);
@@ -271,19 +271,19 @@ package ui.screens
 				_trainingButton.isEnabled = _RicePool.BagsOfRice >= upgradeCost;
 			}
 		}
-		
+
 		private function buyTraining() :void
 		{
 			var upgradeCost :Number = _NinjaPool.trainingCost(_NinjaPool.TrainingUpgradeLevel + 1);
 			_RicePool.BagsOfRice -= upgradeCost;
-			
+
 			_NinjaPool.TrainingUpgradeLevel = Math.min(
 				_NinjaPool.TrainingUpgradeLevel + 1,
 				NinjaPool.MaxTrainingUpgradeLevel);
-				
+
 			refreshButtons();
 		}
-		
+
 		private function refreshClanLeaderButton() :void
 		{
 			var upgradeCost :Number = _NinjaPool.clanLeaderCost(_NinjaPool.ClanLeaderUpgradeLevel + 1);
@@ -305,19 +305,19 @@ package ui.screens
 				_clanLeaderButton.isEnabled = _RicePool.BagsOfRice >= upgradeCost;
 			}
 		}
-		
+
 		private function buyClanLeader() :void
 		{
 			var upgradeCost :Number = _NinjaPool.clanLeaderCost(_NinjaPool.ClanLeaderUpgradeLevel + 1);
 			_RicePool.BagsOfRice -= upgradeCost;
-			
+
 			_NinjaPool.ClanLeaderUpgradeLevel = Math.min(
 				_NinjaPool.ClanLeaderUpgradeLevel + 1,
 				NinjaPool.MaxClanLeaderUpgradeLevel);
-				
+
 			refreshButtons();
 		}
-		
+
 	} // class
 
 } // package

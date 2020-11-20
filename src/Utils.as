@@ -1,6 +1,6 @@
-package  
+package
 {
-	public class Utils 
+	public class Utils
 	{
 		public static function formatNumber(num :Number) :String
 		{
